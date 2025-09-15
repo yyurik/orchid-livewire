@@ -68,10 +68,18 @@ class ServiceProvider extends BaseServiceProvider
 
             if ($config['assets']) {
                 $options = $config['options'];
-                $view->getFactory()
-                    ->startPush('scripts', Livewire::scripts($options['scripts']));
-                $view->getFactory()
-                    ->startPush('stylesheets', Livewire::styles($options['styles']));
+                
+                // Support both Livewire v2 and v3 API
+                if (method_exists(Livewire::class, 'scripts')) {
+                    // Livewire v2 API
+                    $view->getFactory()
+                        ->startPush('scripts', Livewire::scripts($options['scripts'] ?? []));
+                    $view->getFactory()
+                        ->startPush('stylesheets', Livewire::styles($options['styles'] ?? []));
+                } else {
+                    // Livewire v3 API - scripts and styles are handled automatically
+                    // No manual injection needed in v3
+                }
             }
             if ($config['turbolinks']) {
                 $view->getFactory()
