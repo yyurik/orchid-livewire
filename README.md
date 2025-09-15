@@ -13,6 +13,11 @@ Package description: A Livewire macro for Orchid Platform
 
 Install via composer
 ```bash
+# for Laravel 12 with Orchid 12, 13, 14 (supports Livewire v2 and v3)
+composer config repositories.orchid-livewire vcs https://github.com/yyurik/orchid-livewire.git
+composer require livewire/livewire yyurik/orchid-livewire:dev-master
+
+# Original version for older Laravel versions:
 # for Orchid 12, 13, 14
 composer require livewire/livewire alexsabur/orchid-livewire:^5.3
 
